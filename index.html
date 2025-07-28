@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MorzineCapture – Spécialiste Téléphonie & Multimédia</title>
+  <!-- Import modern, legible font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /*
+      Ce fichier propose une version moderne et technologique du site
+      “MorzineCapture”. La palette de couleurs est inspirée de l’univers
+      high‑tech : des tons bleus profonds relevés par des touches de violet
+      et de corail pour les appels à l’action. Les textes sont clairs et
+      bien espacés grâce à la police Inter, et chaque section dispose de
+      marges généreuses pour respirer. Les cartes de services intègrent
+      des ombres douces et un léger déplacement en survol pour un effet
+      dynamique.
+    */
+
+    :root {
+      --color-bg: #0a192f;
+      --color-secondary-bg: #112240;
+      --color-primary: #00bfff;
+      --color-secondary: #7f5af0;
+      --color-accent: #f25f5c;
+      --color-text-light: #dbeafe;
+      --color-text-muted: #a8b2d1;
+      --color-card-bg: #162a48;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header / Hero section */
+    header {
+      position: relative;
+      background-image: linear-gradient(rgba(10,25,47,0.75), rgba(10,25,47,0.85)), url('bg-tech.png');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      text-align: center;
+      padding: 120px 20px;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: var(--color-text-muted);
+      margin-bottom: 40px;
+    }
+    .cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    }
+    .cta:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.4);
+    }
+
+    /* General section styles */
+    section {
+      padding: 80px 20px;
+    }
+    .section-heading {
+      font-size: 2rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--color-primary);
+    }
+
+    /* Services */
+    .services-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .service-card {
+      background: var(--color-card-bg);
+      border-radius: 12px;
+      padding: 40px 30px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+    }
+    .service-card h4 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: var(--color-secondary);
+    }
+    .service-card p {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Contact */
+    .contact-section {
+      background: var(--color-secondary-bg);
+      text-align: center;
+    }
+    .contact-buttons a {
+      display: inline-block;
+      margin: 10px 15px;
+      padding: 12px 28px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      color: #fff;
+      background: var(--color-accent);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .contact-buttons a:hover {
+      background: #d34d4a;
+      transform: translateY(-3px);
+    }
+    .contact-info {
+      margin-top: 20px;
+      font-size: 1rem;
+      color: var(--color-text-muted);
+    }
+
+    /* Quote form */
+    .quote-section {
+      background: var(--color-bg);
+    }
+    .quote-form-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: var(--color-card-bg);
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    }
+    .quote-form-container label {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: var(--color-text-light);
+    }
+    .quote-form-container input,
+    .quote-form-container textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #2f4a71;
+      border-radius: 8px;
+      background: var(--color-secondary-bg);
+      color: var(--color-text-light);
+      font-size: 0.95rem;
+      resize: vertical;
+    }
+    .quote-form-container input:focus,
+    .quote-form-container textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px rgba(0,191,255,0.4);
+    }
+    .quote-form-container button {
+      margin-top: 30px;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 40px;
+      font-size: 1rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+    .quote-form-container button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+    }
+
+    /* Footer */
+    footer {
+      background: #02172e;
+      color: var(--color-text-muted);
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 0.85rem;
+    }
+    footer p {
+      margin: 5px 0;
+    }
+
+    /* Logo styling */
+    .logo {
+      width: 120px;
+      height: auto;
+      margin: 0 auto 20px auto;
+      display: block;
+    }
+
+    /* Language toggle button in the header */
+    .language-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .language-toggle a {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: var(--color-secondary-bg);
+      color: var(--color-primary);
+      font-size: 0.85rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    .language-toggle a:hover {
+      background: var(--color-primary);
+      color: #0a192f;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      header p {
+        font-size: 1rem;
+      }
+      .section-heading {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero / Accueil -->
+  <header>
+    <!-- Bouton de sélection de langue -->
+    <div class="language-toggle">
+      <a href="index_modern_en.html">EN</a>
+    </div>
+    <!-- Logo de la marque -->
+    <img src="logo.png" alt="MorzineCapture logo" class="logo">
+    <h1>MorzineCapture</h1>
+    <p>Votre expert en téléphonie et accessoires à Morzine</p>
+    <a href="tel:+33661510978" class="cta">📞 Nous contacter</a>
+  </header>
+
+  <!-- Services -->
+  <section class="services-section">
+    <h2 class="section-heading">Nos Services</h2>
+    <div class="services-container">
+      <div class="service-card">
+        <h4>📱 Vente de Téléphones</h4>
+        <p>Smartphones neufs et reconditionnés à des prix avantageux. Découvrez les dernières nouveautés comme les modèles reconditionnés premium.</p>
+      </div>
+      <div class="service-card">
+        <h4>🔧 Réparation Express</h4>
+        <p>Remplacement d’écran, batterie, connecteur… Intervention rapide et garantie pour tous vos appareils.</p>
+      </div>
+      <div class="service-card">
+        <h4>🎧 Accessoires Multimedia</h4>
+        <p>Coques, câbles, écouteurs, batteries externes et plus encore pour compléter votre équipement.</p>
+      </div>
+      <div class="service-card">
+        <h4>📦 Devis Personnalisés</h4>
+        <p>Obtenez votre devis en quelques clics, gratuitement et sans engagement. Nous adaptons nos prestations à vos besoins.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact-section">
+    <h2 class="section-heading">Contactez‑nous</h2>
+    <div class="contact-buttons">
+      <a href="mailto:morzinecapture@gmail.com">✉️ Envoyer un email</a>
+      <a href="tel:+33661510978">📞 Appeler</a>
+    </div>
+    <div class="contact-info">
+      📍 115 rue du Bourg, 74110 Morzine &nbsp;|&nbsp; 📱 06 61 51 09 78
+    </div>
+  </section>
+
+  <!-- Quote form -->
+  <section class="quote-section">
+    <h2 class="section-heading">Demande de devis</h2>
+    <div class="quote-form-container">
+      <form action="https://formsubmit.co/morzinecapture@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Nouvelle demande de devis - MorzineCapture">
+        <input type="hidden" name="_captcha" value="false">
+        <label for="nom">Votre nom *</label>
+        <input type="text" id="nom" name="Nom" required>
+        <label for="email">Votre email *</label>
+        <input type="email" id="email" name="Email" required>
+        <label for="phone">Téléphone</label>
+        <input type="tel" id="phone" name="Téléphone">
+        <label for="message">Votre demande *</label>
+        <textarea id="message" name="Message" rows="5" required></textarea>
+        <button type="submit">Envoyer ma demande</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 MorzineCapture</p>
+    <p>Illustrations et design modernisés par MorzineCapture</p>
+  </footer>
+</body>
+</html>
