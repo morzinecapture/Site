@@ -27,6 +27,7 @@
                 <span>MORZINECAPTURE</span>
             </a>
             <div class="nav-links">
+                <a href="#reparation">Réparation</a>
                 <a href="#services">Expertise</a>
                 <a href="#catalogue">Collection</a>
                 <a href="#atelier">L'Atelier</a>
@@ -59,6 +60,90 @@
             </div>
         </div>
     </header>
+
+    <!-- Repair Motion Section (scroll-driven) -->
+    <section id="reparation" class="repair" data-repair aria-label="Une réparation d'écran, étape par étape">
+      <div class="repair-sticky">
+        <div class="repair-stage" data-stage>
+            <img class="repair-frame" src="repair/frame-1.webp" srcset="repair/frame-1-m.webp 960w, repair/frame-1.webp 1672w" sizes="(max-width: 768px) 230vw, 100vw" width="1672" height="941" alt="Smartphone à l'écran brisé sur l'établi" decoding="async">
+            <img class="repair-frame" src="repair/frame-2.webp" srcset="repair/frame-2-m.webp 960w, repair/frame-2.webp 1672w" sizes="(max-width: 768px) 230vw, 100vw" width="1672" height="941" alt="Ouverture de l'écran à la ventouse" decoding="async">
+            <img class="repair-frame" src="repair/frame-3.webp" srcset="repair/frame-3-m.webp 960w, repair/frame-3.webp 1672w" sizes="(max-width: 768px) 230vw, 100vw" width="1672" height="941" alt="Remplacement de la dalle, gants et pinces" decoding="async">
+            <img class="repair-frame" src="repair/frame-4.webp" srcset="repair/frame-4-m.webp 960w, repair/frame-4.webp 1672w" sizes="(max-width: 768px) 230vw, 100vw" width="1672" height="941" alt="Smartphone réparé, écran neuf allumé" decoding="async">
+            <div class="repair-scan" aria-hidden="true"></div>
+            <div class="repair-glint" aria-hidden="true"></div>
+            <div class="repair-spot" data-dir="right" style="left:52.6%;top:61%">
+                <span class="dot"></span>
+                <svg class="leader" viewBox="0 0 90 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70 L50 10 L90 10"/></svg>
+                <span class="tag"><b>01</b>Point d'impact</span>
+            </div>
+            <div class="repair-spot" data-dir="left" data-v="down" style="left:74%;top:31%">
+                <span class="dot"></span>
+                <svg class="leader" viewBox="0 0 90 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70 L50 10 L90 10"/></svg>
+                <span class="tag"><b>02</b>Décollement à chaud</span>
+            </div>
+            <div class="repair-spot" data-dir="right" style="left:54.4%;top:50%">
+                <span class="dot"></span>
+                <svg class="leader" viewBox="0 0 90 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70 L50 10 L90 10"/></svg>
+                <span class="tag"><b>03</b>Nappe d'affichage</span>
+            </div>
+            <div class="repair-spot" data-dir="left" style="left:68.8%;top:55%">
+                <span class="dot"></span>
+                <svg class="leader" viewBox="0 0 90 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70 L50 10 L90 10"/></svg>
+                <span class="tag"><b>04</b>Test tactile · OK</span>
+            </div>
+        </div>
+        <div class="repair-vignette" aria-hidden="true"></div>
+        <div class="repair-grain" aria-hidden="true"></div>
+
+        <div class="repair-intro">
+            <p class="repair-overline">L'Atelier en mouvement</p>
+            <h2>Du verre brisé<br>à la <em>perfection</em>.</h2>
+            <div class="repair-hint"><span class="repair-mouse"></span>Faites défiler</div>
+        </div>
+
+        <div class="repair-captions">
+            <div class="repair-cap">
+                <span class="num">01</span>
+                <span class="kicker">Diagnostic</span>
+                <h3>L'impact.</h3>
+                <p>Un écran brisé n'est jamais qu'un écran. On contrôle la dalle, le châssis et la connectique avant de toucher quoi que ce soit.</p>
+            </div>
+            <div class="repair-cap">
+                <span class="num">02</span>
+                <span class="kicker">Ouverture</span>
+                <h3>L'ouverture.</h3>
+                <p>Chauffe maîtrisée, ventouse, médiator. L'écran se décolle sans forcer — c'est ici que se joue la précision.</p>
+            </div>
+            <div class="repair-cap">
+                <span class="num">03</span>
+                <span class="kicker">Remplacement</span>
+                <h3>La greffe.</h3>
+                <p>Déconnexion des nappes, pose de la nouvelle dalle, contrôle de chaque connecteur. Gants, outils dédiés, zéro poussière.</p>
+            </div>
+            <div class="repair-cap">
+                <span class="num">04</span>
+                <span class="kicker">Renaissance</span>
+                <h3>Comme neuf.</h3>
+                <p>Test tactile, luminosité, capteurs. Votre téléphone repart scellé, contrôlé et garanti.</p>
+                <a href="#contact" class="btn-primary">Prendre RDV</a>
+            </div>
+        </div>
+
+        <div class="repair-rail" aria-hidden="true">
+            <div class="repair-rail-fill"></div>
+            <div class="repair-tick" style="top:0.000%"><span>Diagnostic</span></div>
+            <div class="repair-tick" style="top:33.333%"><span>Ouverture</span></div>
+            <div class="repair-tick" style="top:66.667%"><span>Remplacement</span></div>
+            <div class="repair-tick" style="top:100.000%"><span>Renaissance</span></div>
+        </div>
+
+        <div class="repair-readout" aria-hidden="true">
+            <small>Réparation</small>
+            <strong data-pct>000</strong><strong><i>%</i></strong>
+            <div class="bar"><i></i></div>
+        </div>
+      </div>
+    </section>
 
     <!-- Services Section -->
     <section id="services" class="section services-section">
