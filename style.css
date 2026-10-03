@@ -502,3 +502,533 @@ a {
 
     /* TODO: Mobile Toggle */
 }
+/* =========================================
+   9. REPAIR — SCROLL-DRIVEN MOTION SECTION
+   ========================================= */
+.repair {
+    --r-bg: #0c0a09;
+    --r-ink: #f5f5f4;
+    --r-muted: #a8a29e;
+    --r-gold: #d97706;
+    --r-gold-soft: rgba(217, 119, 6, 0.35);
+    position: relative;
+    height: 520vh;
+    background: var(--r-bg);
+    color: var(--r-ink);
+}
+
+.repair-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Stage: a 16:9 canvas that always covers the viewport, so the
+   hotspots stay glued to the same pixel of the photo. */
+.repair-stage {
+    --s: 1.2;
+    --mx: 0px;
+    --my: 0px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: max(100vw, 177.78vh);
+    height: max(56.25vw, 100vh);
+    transform: translate(-50%, -50%) translate3d(var(--mx), var(--my), 0) scale(var(--s));
+    transform-origin: 63% 58%;
+    will-change: transform;
+}
+
+.repair-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    will-change: opacity, filter;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.repair-frame:first-of-type { opacity: 1; }
+
+/* Diagnostic scan over the phone (frame 1) */
+.repair-scan {
+    position: absolute;
+    left: 36%;
+    top: 40%;
+    width: 54%;
+    height: 42%;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    -webkit-mask: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+            mask: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.repair-scan::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background: var(--r-gold);
+    box-shadow: 0 0 18px 4px var(--r-gold-soft), 0 0 60px 12px rgba(217, 119, 6, 0.18);
+    transform: translateX(calc(var(--scan, 0) * 54vw));
+}
+
+.repair-scan::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(217, 119, 6, .16) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(217, 119, 6, .16) 1px, transparent 1px);
+    background-size: 22px 22px;
+    -webkit-mask: linear-gradient(90deg, #000 calc(var(--scan, 0) * 100%), transparent calc(var(--scan, 0) * 100% + 1%));
+            mask: linear-gradient(90deg, #000 calc(var(--scan, 0) * 100%), transparent calc(var(--scan, 0) * 100% + 1%));
+}
+
+/* Light sweep over the new screen (frame 4) */
+.repair-glint {
+    position: absolute;
+    left: 38%;
+    top: 42%;
+    width: 50%;
+    height: 37%;
+    overflow: hidden;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    -webkit-mask: radial-gradient(ellipse at center, #000 45%, transparent 75%);
+            mask: radial-gradient(ellipse at center, #000 45%, transparent 75%);
+}
+
+.repair-glint::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 30%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .55), transparent);
+    transform: translateX(calc(-120% + var(--glint, 0) * 480%)) rotate(18deg);
+    opacity: var(--glint-o, 0);
+}
+
+/* HUD callouts */
+.repair-spot {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.repair-spot .dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 -5px;
+    border-radius: 50%;
+    background: var(--r-gold);
+    box-shadow: 0 0 0 4px rgba(217, 119, 6, .25);
+}
+
+.repair-spot .dot::after {
+    content: '';
+    position: absolute;
+    inset: -14px;
+    border: 1px solid var(--r-gold);
+    border-radius: 50%;
+    animation: repairPulse 2.2s ease-out infinite;
+}
+
+@keyframes repairPulse {
+    from { transform: scale(.4); opacity: 1; }
+    to   { transform: scale(1.8); opacity: 0; }
+}
+
+.repair-spot .leader {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 90px;
+    height: 70px;
+    overflow: visible;
+}
+
+.repair-spot .leader path {
+    fill: none;
+    stroke: var(--r-gold);
+    stroke-width: 1;
+    stroke-dasharray: 200;
+    stroke-dashoffset: 200;
+    transition: stroke-dashoffset .9s cubic-bezier(.65, 0, .35, 1);
+}
+
+.repair-spot .tag {
+    position: absolute;
+    left: 96px;
+    bottom: 60px;
+    white-space: nowrap;
+    font-family: var(--font-sans);
+    font-size: .72rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--r-ink);
+    padding: 6px 10px;
+    border: 1px solid rgba(217, 119, 6, .5);
+    background: rgba(12, 10, 9, .55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity .5s .45s, transform .5s .45s;
+}
+
+.repair-spot .tag b {
+    color: var(--r-gold);
+    font-weight: 500;
+    margin-right: 8px;
+}
+
+.repair-spot.is-on .leader path { stroke-dashoffset: 0; }
+.repair-spot.is-on .tag { opacity: 1; transform: none; }
+
+/* Left-pointing variant */
+.repair-spot[data-dir="left"] .leader { left: auto; right: 0; transform: scaleX(-1); }
+.repair-spot[data-dir="left"] .tag { left: auto; right: 96px; transform: translateX(8px); }
+.repair-spot[data-dir="left"].is-on .tag { transform: none; }
+
+/* Downward variant (label below the dot) */
+.repair-spot[data-v="down"] .leader { bottom: auto; top: 0; transform: scaleY(-1); }
+.repair-spot[data-v="down"][data-dir="left"] .leader { transform: scale(-1, -1); }
+.repair-spot[data-v="down"] .tag { bottom: auto; top: 54px; }
+
+/* Atmosphere */
+.repair-vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(90deg, rgba(12, 10, 9, .92) 0%, rgba(12, 10, 9, .55) 30%, transparent 55%),
+        radial-gradient(ellipse at 65% 55%, transparent 40%, rgba(12, 10, 9, .7) 100%);
+}
+
+.repair-grain {
+    position: absolute;
+    inset: -50%;
+    pointer-events: none;
+    opacity: .07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: repairGrain 1s steps(6) infinite;
+}
+
+@keyframes repairGrain {
+    0%   { transform: translate(0, 0); }
+    20%  { transform: translate(-3%, 2%); }
+    40%  { transform: translate(2%, -3%); }
+    60%  { transform: translate(-2%, -1%); }
+    80%  { transform: translate(3%, 3%); }
+    100% { transform: translate(0, 0); }
+}
+
+/* Intro title */
+.repair-intro {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 7.5vw;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.repair-overline {
+    font-size: .78rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--r-gold);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.repair-overline::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: currentColor;
+}
+
+.repair-intro h2 {
+    color: var(--r-ink);
+    font-size: clamp(2.6rem, 6vw, 5.6rem);
+    line-height: 1.02;
+    font-weight: 400;
+    max-width: 14ch;
+}
+
+.repair-intro h2 em {
+    font-style: italic;
+    color: var(--r-gold);
+}
+
+.repair-hint {
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: .75rem;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--r-muted);
+}
+
+.repair-mouse {
+    width: 22px;
+    height: 34px;
+    border: 1px solid var(--r-muted);
+    border-radius: 12px;
+    position: relative;
+}
+
+.repair-mouse::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 7px;
+    width: 2px;
+    height: 7px;
+    margin-left: -1px;
+    border-radius: 2px;
+    background: var(--r-gold);
+    animation: repairWheel 1.6s ease-in-out infinite;
+}
+
+@keyframes repairWheel {
+    0%   { transform: translateY(0); opacity: 1; }
+    70%  { transform: translateY(10px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 0; }
+}
+
+/* Step captions */
+.repair-captions {
+    position: absolute;
+    left: 7.5vw;
+    top: 50%;
+    width: min(420px, 36vw);
+    transform: translateY(-50%);
+    z-index: 3;
+}
+
+.repair-cap {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateY(-50%);
+    opacity: 0;
+    will-change: opacity, transform, filter;
+}
+
+.repair-cap .num {
+    font-family: var(--font-serif);
+    font-size: 5.5rem;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(217, 119, 6, .7);
+    display: block;
+    margin-bottom: .4rem;
+}
+
+.repair-cap .kicker {
+    font-size: .75rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--r-gold);
+}
+
+.repair-cap h3 {
+    color: var(--r-ink);
+    font-size: clamp(2rem, 3.4vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin: .5rem 0 1rem;
+}
+
+.repair-cap p {
+    color: var(--r-muted);
+    font-weight: 300;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.repair-cap .btn-primary {
+    margin-top: 2rem;
+    pointer-events: auto;
+}
+
+/* Progress rail */
+.repair-rail {
+    position: absolute;
+    right: 4vw;
+    top: 50%;
+    height: 46vh;
+    transform: translateY(-50%);
+    width: 1px;
+    background: rgba(245, 245, 244, .15);
+    z-index: 3;
+}
+
+.repair-rail-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: var(--r-gold);
+    transform-origin: top;
+    transform: scaleY(0);
+    box-shadow: 0 0 10px var(--r-gold);
+}
+
+.repair-tick {
+    position: absolute;
+    left: 0;
+    transform: translate(-50%, -50%);
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--r-bg);
+    border: 1px solid rgba(245, 245, 244, .35);
+    transition: background .4s, border-color .4s, box-shadow .4s;
+}
+
+.repair-tick span {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: .68rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--r-muted);
+    white-space: nowrap;
+    transition: color .4s;
+}
+
+.repair-tick.is-on {
+    background: var(--r-gold);
+    border-color: var(--r-gold);
+    box-shadow: 0 0 12px var(--r-gold);
+}
+
+.repair-tick.is-on span { color: var(--r-ink); }
+
+/* Live percentage */
+.repair-readout {
+    position: absolute;
+    right: 4vw;
+    bottom: 5vh;
+    z-index: 3;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.repair-readout small {
+    display: block;
+    font-size: .68rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--r-muted);
+}
+
+.repair-readout strong {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--r-ink);
+}
+
+.repair-readout strong i {
+    font-style: normal;
+    color: var(--r-gold);
+    font-size: 1.4rem;
+    margin-left: 4px;
+}
+
+.repair-readout .bar {
+    margin-top: 10px;
+    width: 160px;
+    height: 2px;
+    background: rgba(245, 245, 244, .15);
+    margin-left: auto;
+    overflow: hidden;
+}
+
+.repair-readout .bar i {
+    display: block;
+    height: 100%;
+    background: var(--r-gold);
+    transform-origin: left;
+    transform: scaleX(0);
+}
+
+/* Mobile: phone framed in the upper half, text below */
+@media (max-width: 768px), (max-aspect-ratio: 4/5) {
+    .repair { height: 460vh; }
+
+    .repair-stage {
+        width: 230vw;
+        height: 129.4vw;
+        top: 40%;
+        transform: translate(-62%, -50%) translate3d(var(--mx), var(--my), 0) scale(var(--s));
+        -webkit-mask: linear-gradient(180deg, transparent, #000 14%, #000 80%, transparent);
+                mask: linear-gradient(180deg, transparent, #000 14%, #000 80%, transparent);
+    }
+
+    .repair-vignette {
+        background: linear-gradient(0deg, rgba(12, 10, 9, .97) 22%, transparent 55%);
+    }
+
+    .repair-intro {
+        justify-content: flex-end;
+        padding: 0 7vw 14vh;
+    }
+
+    .repair-captions {
+        left: 7vw;
+        right: 7vw;
+        width: auto;
+        top: auto;
+        bottom: 12vh;
+        transform: none;
+    }
+
+    .repair-cap { top: auto; bottom: 0; transform: none; }
+    .repair-cap .num { font-size: 3rem; }
+    .repair-cap p { font-size: .95rem; }
+
+    .repair-rail { display: none; }
+
+    .repair-readout { top: 128px; bottom: auto; right: 7vw; }
+    .repair-readout strong { font-size: 1.8rem; }
+    .repair-readout .bar { width: 100px; }
+
+    .repair-spot .tag { font-size: .6rem; letter-spacing: .12em; padding: 4px 7px; left: 56px; bottom: 36px; }
+    .repair-spot[data-dir="left"] .tag { right: 56px; }
+    .repair-spot .leader { width: 52px; height: 40px; }
+    .repair-spot[data-v="down"] .tag { top: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .repair-grain, .repair-mouse::after, .repair-spot .dot::after { animation: none; }
+}
